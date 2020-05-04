@@ -1,3 +1,5 @@
+python-pip
+xfce4-notifyd
 notepadqq
 xarchiver
 mixxx
