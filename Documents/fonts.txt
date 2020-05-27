@@ -1,0 +1,2 @@
+https://github.com/be5invis/Iosevka/releases/download/v3.0.1/ttf-iosevka-3.0.1.zip
+https://github.com/madmalik/mononoki/releases/download/1.2/mononoki.zip
