@@ -33,7 +33,7 @@ mkdir /mnt/home
 mount /dev/sda3 /mnt/home
 swapon /dev/sda4
 
-pacstrap -i /mnt base base-devel linux linux-firmware linux-headers amd-ucode
+pacstrap -i /mnt base base-devel linux linux-firmware linux-headers amd-ucode git curl wget rsync reflector
 
 pacman-key --init
 pacman-key --populate archlinux
@@ -49,6 +49,9 @@ vim /etc/locale.gen [remove '#' in front of 'en_US.UTF-8']
 
 locale-gen
 
+echo LANG=en_US.UTF-8 > /etc/locale.conf
+export LANG=en_US.UTF-8
+
 ln -sf /usr/share/zoneinfo/Europe/Bucharest /etc/localtime
 
 hwclock --systohc --utc
@@ -57,15 +60,20 @@ echo archlinux > /etc/hostname
 
 vim /etc/hosts {
 127.0.0.1	localhost
-::1		localhost
+::1		    localhost
 127.0.1.1	archlinux
 }
 
 passwd [root password]
 
-pacman -S grub sudo dhcpcd netctl wpa_supplicant iw dialog broadcom-wl wireless_tools networkmanager network-manager-applet
+pacman -S grub sudo dhcpcd netctl wpa_supplicant iw dialog broadcom-wl wireless_tools networkmanager network-manager-applet bash-completion efibootmgr dosfstools os-prober mtools
 
 grub-install /dev/sda
+or
+grub-install --target=x86_64-efi  --bootloader-id=grub_uefi --recheck
+or
+grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
+
 
 grub-mkconfig -o /boot/grub/grub.cfg
 
